@@ -17,6 +17,7 @@ public class CustomerDao {
     private final String USER = "root";
     private final String PASSWORD = "root";
 
+    //This is method findAll
     public List<Customer> findAll() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
