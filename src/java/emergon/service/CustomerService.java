@@ -10,4 +10,8 @@ public class CustomerService {
     public List<Customer> getCustomers(){
         return cdao.findAll();
     }
+
+    public void createCustomer(String cname) {
+        cdao.create(cname);
+    }
 }

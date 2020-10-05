@@ -1,5 +1,6 @@
 package emergon.servlet;
 
+import emergon.service.CustomerService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CreateCustomerServlet", urlPatterns = {"/customer/insert"})//this url is after contextPath
 public class CreateCustomerServlet extends HttpServlet {
 
+    private CustomerService service = new CustomerService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String contextPath = req.getContextPath();//WebServlet
@@ -35,6 +37,16 @@ public class CreateCustomerServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         out.print(builder);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String cname = req.getParameter("cname");
+        service.createCustomer(cname);
+        String contextPath = req.getContextPath();
+        resp.sendRedirect(contextPath+"/ListCustomerServlet");
+    }
+    
+    
 
     
 }
