@@ -34,7 +34,7 @@ public class ListCustomerServlet extends HttpServlet {
         
         for(Customer c: listOfCustomers){
             builder.append("<tr>")
-//                    .append("<td>").append(c.getCcode()).append("</td>")
+                    .append("<td>").append(c.getCcode()).append("</td>")
                     .append("<td>").append(c.getCname()).append("</td>")
                     .append("</tr>");
         }
