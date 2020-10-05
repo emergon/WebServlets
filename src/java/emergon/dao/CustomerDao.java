@@ -1,14 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package emergon.dao;
 
-/**
- *
- * @author user
- */
+import emergon.entity.Customer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.List;
+
 public class CustomerDao {
     
+    private final String URL = "jdbc:mysql://localhost:3306/sales?serverTimezone=UTC";
+    private final String USER = "root";
+    private final String PASSWORD = "1234";
+    
+    public List<Customer> findAll(){
+        //Connect to DB and get data
+        Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        return null;
+    }
 }
