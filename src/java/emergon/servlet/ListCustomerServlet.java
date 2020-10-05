@@ -1,6 +1,7 @@
 package emergon.servlet;
 
 import emergon.entity.Customer;
+import emergon.service.CustomerService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -14,13 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ListCustomerServlet", urlPatterns = {"/ListCustomerServlet"})
 public class ListCustomerServlet extends HttpServlet {
 
+    private CustomerService service = new CustomerService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Customer> listOfCustomers = new ArrayList();
-        listOfCustomers.add(new Customer(12, "Jack"));
-        listOfCustomers.add(new Customer(25, "Mary"));
-        listOfCustomers.add(new Customer(30, "Andy"));
-        listOfCustomers.add(new Customer(35, "Peter"));
+        List<Customer> listOfCustomers = service.getCustomers();
         
         StringBuilder builder = new StringBuilder();
         builder.append("<!DOCTYPE html>")
