@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//this is my class
 public class CustomerDao {
 
     private final String URL = "jdbc:mysql://localhost:3306/sales?serverTimezone=UTC";
