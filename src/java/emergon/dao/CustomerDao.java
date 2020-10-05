@@ -12,27 +12,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //this is my class
-public class CustomerDao {
-
-    private final String URL = "jdbc:mysql://localhost:3306/sales?serverTimezone=UTC";
-    private final String USER = "root";
-    private final String PASSWORD = "root";
-
+public class CustomerDao extends SuperDao{
     //This is method findAll
     public List<Customer> findAll() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         List<Customer> customers = new ArrayList();
-        Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+        Connection conn;
         try {
-            //Connect to DB and get data
-            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            conn = openConnection();
             stmt = conn.createStatement();
             rs = stmt.executeQuery("SELECT ccode, cname FROM customer");
             while (rs.next()) {
@@ -44,20 +32,7 @@ public class CustomerDao {
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            closeConnections(stmt, rs);
         }
         return customers;
     }

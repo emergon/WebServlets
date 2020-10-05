@@ -28,6 +28,7 @@ public class ListCustomerServlet extends HttpServlet {
                 .append("</head>")
                 .append("<body>")
                 .append("<h1>List of Customers</h1>")
+                .append("<a href='customer/insert'>").append("New Customer").append("</a>")
                 .append("<table border='1'>");
         
         for(Customer c: listOfCustomers){
