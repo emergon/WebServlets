@@ -21,7 +21,8 @@
                             <a href="product/editProduct?id=${p.pcode}">Edit</a>
                         </td>
                         <td>
-                            <a href="javascript:delete(${p.pcode})">Delete</a>
+                            <a href="product/deleteProduct?id=+${p.pcode}" onclick="return confirm('Do you realy want to delete product:'+${p.pcode}+'????')">Delete</a>
+                            
                         </td>
                     </tr>
                 </c:forEach>
