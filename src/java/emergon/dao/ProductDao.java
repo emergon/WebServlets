@@ -15,6 +15,7 @@ public class ProductDao extends SuperDao{
 
     private final String FINDALL = "select pcode, pdescr, pprice from product;";
     private final String DELETEBYID = "DELETE FROM product WHERE pcode = ?";
+    private final String CREATEPRODUCT = "INSERT INTO product (pprice, pdescr) VALUES (?, ?)";
     
     public List<Product> findAll() {
     List<Product> products = new ArrayList();
@@ -60,6 +61,29 @@ public class ProductDao extends SuperDao{
             closeConnections(pstm, null);
         }
         return message;
+    }
+
+    public void create(Product product) {
+//        boolean created = false;
+//        String message = null;
+        Connection con = null;
+        PreparedStatement pstm = null;
+        con = openConnection();    
+        try {
+            pstm = con.prepareStatement(CREATEPRODUCT);
+            pstm.setString(2, product.getPdescr());
+            pstm.setDouble(1, product.getPprice());
+            pstm.executeUpdate();
+//            if(result > 0){
+//                created = true;
+//            }
+        } catch (SQLException ex) {
+            //Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException:"+ex.getLocalizedMessage());
+//            message = ex.getLocalizedMessage();
+        } finally{
+            closeConnections(pstm, null);
+        }
     }
     
 }

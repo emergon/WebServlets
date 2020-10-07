@@ -27,8 +27,11 @@ public class ListProductServlet extends HttpServlet {
 //        Pass the request to the JSP page to show the list of products. How? Use a RequestDispatcher object
           RequestDispatcher dispatcher = req.getRequestDispatcher("/product/productList.jsp");
           dispatcher.forward(req, resp);
-        
     }
 
-    
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+
 }

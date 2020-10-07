@@ -11,6 +11,7 @@
     <body>
         <div align="center">
             <h2>List of Products</h2>
+            <a href="${pageContext.request.contextPath}/product/create">Create New Product</a>
             <table border="1">
                 <c:forEach items="${products}" var="p">
                     <tr>

@@ -14,13 +14,6 @@
     <body>
         <h4>Product could not be deleted!!!!</h4>
         <p>
-            <%
-                String minima = (String)request.getAttribute("minima");
-                out.print(minima);
-            %>
-            
-        </p>
-        <p>
             <b>${minima}</b>
         </p>
         <!--expression Language-->

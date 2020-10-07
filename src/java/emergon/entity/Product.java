@@ -16,6 +16,11 @@ public class Product {
         this.pprice = pprice;
     }
 
+    public Product(String pdescr, double pprice) {
+        this.pdescr = pdescr;
+        this.pprice = pprice;
+    }
+
     public int getPcode() {
         return pcode;
     }

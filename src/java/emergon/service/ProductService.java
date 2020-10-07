@@ -17,4 +17,10 @@ public class ProductService {
         String message = pdao.delete(code);
         return message;
     }
+
+    public void createProduct(String description, String price) {
+        double timi = Double.parseDouble(price);
+        Product product = new Product(description, timi);
+        pdao.create(product);
+    }
 }
