@@ -2,6 +2,7 @@ package emergon.dao;
 
 import emergon.entity.Product;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 public class ProductDao extends SuperDao{
 
     private final String FINDALL = "select pcode, pdescr, pprice from product;";
+    private final String DELETEBYID = "DELETE FROM product WHERE pcode = ?";
     
     public List<Product> findAll() {
     List<Product> products = new ArrayList();
@@ -36,5 +38,28 @@ public class ProductDao extends SuperDao{
             closeConnections(stmt, rs);
         }
         return products;}
+
+    public String delete(int code) {
+        boolean deleted = false;
+        String message = null;
+        Connection con = null;
+        PreparedStatement pstm = null;
+        con = openConnection();    
+        try {
+            pstm = con.prepareStatement(DELETEBYID);
+            pstm.setInt(1, code);//put variable code into question mark number 1.
+            int result = pstm.executeUpdate();
+            if(result > 0){
+                deleted = true;
+            }
+        } catch (SQLException ex) {
+            //Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException:"+ex.getLocalizedMessage());
+            message = ex.getLocalizedMessage();
+        } finally{
+            closeConnections(pstm, null);
+        }
+        return message;
+    }
     
 }

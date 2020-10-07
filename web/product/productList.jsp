@@ -21,7 +21,7 @@
                             <a href="product/editProduct?id=${p.pcode}">Edit</a>
                         </td>
                         <td>
-                            <a href="product/deleteProduct?id=+${p.pcode}" onclick="return confirm('Do you realy want to delete product:'+${p.pcode}+'????')">Delete</a>
+                            <a href="product/deleteProduct?id=${p.pcode}" onclick="return confirm('Do you realy want to delete product:'+${p.pcode}+'????')">Delete</a>
                             
                         </td>
                     </tr>
@@ -29,12 +29,6 @@
             </table>
         </div>
 
-        <script>
-            function delete(productId){
-                if(confirm('Do you realy want to delete product:'+productId+'????')){
-                    window.location = 'product/deleteProduct?id='+productId;
-                }
-            }
-        </script>
+        
     </body>
 </html>

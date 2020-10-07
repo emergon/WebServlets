@@ -11,4 +11,10 @@ public class ProductService {
     public List<Product> getProducts(){
         return pdao.findAll();
     }
+
+    public String deleteProduct(String pcode) {
+        int code = Integer.parseInt(pcode);
+        String message = pdao.delete(code);
+        return message;
+    }
 }
