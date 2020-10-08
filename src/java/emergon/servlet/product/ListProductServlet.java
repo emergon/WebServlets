@@ -23,6 +23,7 @@ public class ListProductServlet extends HttpServlet {
 //        Get the list of products from the DB
           List<Product> listOfProducts = service.getProducts();
 //        Store them into the request
+          
           req.setAttribute("products", listOfProducts);
 //        Pass the request to the JSP page to show the list of products. How? Use a RequestDispatcher object
           RequestDispatcher dispatcher = req.getRequestDispatcher("/product/productList.jsp");

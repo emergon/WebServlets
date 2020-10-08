@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,8 +11,13 @@
     </head>
     <body>
         <div align="center">
+            <%@include file="../header.jsp" %>
             <h2>List of Products</h2>
             <a href="${pageContext.request.contextPath}/product/create">Create New Product</a>
+            <br/>
+            <br/>
+            ${param.minima}
+            <br/>
             <table border="1">
                 <c:forEach items="${products}" var="p">
                     <tr>
@@ -28,8 +34,8 @@
                     </tr>
                 </c:forEach>
             </table>
+            <jsp:include page="../footer.jsp"/>
         </div>
 
-        
     </body>
 </html>

@@ -13,12 +13,14 @@
     </head>
     <body>
         <div align="center">
+            <%@include file="../header.jsp" %>
             <h2>Create New Product</h2>
             <form action="${pageContext.request.contextPath}/product/create" method="POST" style="margin-top: 5em">
                 Description : <input type="text" name="description"/> <br/>
                 Price : <input type="number" name="price" /><br/>
                 <input type="submit" value="Submit"/><br/>
             </form>
+            <jsp:include page="../footer.jsp"/>
         </div>
     </body>
 </html>

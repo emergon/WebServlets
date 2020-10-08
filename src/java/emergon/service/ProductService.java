@@ -23,4 +23,18 @@ public class ProductService {
         Product product = new Product(description, timi);
         pdao.create(product);
     }
+
+    public Product findProduct(String id) {
+        int pcode = Integer.parseInt(id);
+        Product p = pdao.findById(pcode);
+        return p;
+    }
+
+    public boolean updateProduct(String pcode, String description, String price) {
+        int code = Integer.parseInt(pcode);
+        double timi = Double.parseDouble(price);
+        Product p = new Product(code, description, timi);
+        boolean result = pdao.update(p);
+        return result;
+    }
 }

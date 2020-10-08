@@ -11,14 +11,16 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProductDao extends SuperDao{
+public class ProductDao extends SuperDao {
 
     private final String FINDALL = "select pcode, pdescr, pprice from product;";
     private final String DELETEBYID = "DELETE FROM product WHERE pcode = ?";
     private final String CREATEPRODUCT = "INSERT INTO product (pprice, pdescr) VALUES (?, ?)";
-    
+    private final String FINDBYID = "SELECT * FROM product WHERE pcode = ?";
+    private final String UPDATEBYID = "UPDATE product SET pdescr = ?, pprice = ? WHERE pcode =?";
+
     public List<Product> findAll() {
-    List<Product> products = new ArrayList();
+        List<Product> products = new ArrayList();
         Statement stmt = null;
         ResultSet rs = null;
         Connection conn;
@@ -38,26 +40,27 @@ public class ProductDao extends SuperDao{
         } finally {
             closeConnections(stmt, rs);
         }
-        return products;}
+        return products;
+    }
 
     public String delete(int code) {
         boolean deleted = false;
         String message = null;
         Connection con = null;
         PreparedStatement pstm = null;
-        con = openConnection();    
+        con = openConnection();
         try {
             pstm = con.prepareStatement(DELETEBYID);
             pstm.setInt(1, code);//put variable code into question mark number 1.
             int result = pstm.executeUpdate();
-            if(result > 0){
+            if (result > 0) {
                 deleted = true;
             }
         } catch (SQLException ex) {
             //Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("SQLException:"+ex.getLocalizedMessage());
+            System.out.println("SQLException:" + ex.getLocalizedMessage());
             message = ex.getLocalizedMessage();
-        } finally{
+        } finally {
             closeConnections(pstm, null);
         }
         return message;
@@ -68,7 +71,7 @@ public class ProductDao extends SuperDao{
 //        String message = null;
         Connection con = null;
         PreparedStatement pstm = null;
-        con = openConnection();    
+        con = openConnection();
         try {
             pstm = con.prepareStatement(CREATEPRODUCT);
             pstm.setString(2, product.getPdescr());
@@ -79,11 +82,57 @@ public class ProductDao extends SuperDao{
 //            }
         } catch (SQLException ex) {
             //Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("SQLException:"+ex.getLocalizedMessage());
+            System.out.println("SQLException:" + ex.getLocalizedMessage());
 //            message = ex.getLocalizedMessage();
-        } finally{
+        } finally {
             closeConnections(pstm, null);
         }
     }
-    
+
+    public Product findById(int pcode) {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Product product = null;
+        Connection con = openConnection();
+        try {
+            pstm = con.prepareStatement(FINDBYID);
+            pstm.setInt(1, pcode);
+            rs = pstm.executeQuery();
+            rs.next();//ResultSet's cursor starts before 1st row.
+            int code = rs.getInt(1);
+            String description = rs.getString("pdescr");
+            double price = rs.getDouble("pprice");
+            product = new Product(code, description, price);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeConnections(pstm, rs);
+        }
+        return product;
+    }
+
+    public boolean update(Product p) {
+        boolean updated = false;
+        //UPDATE product SET pdescr = ?, pprice = ? WHERE pcode =?
+        Connection con = null;
+        PreparedStatement pstm = null;
+        con = openConnection();
+        try {
+            pstm = con.prepareStatement(UPDATEBYID);
+            pstm.setString(1, p.getPdescr());
+            pstm.setDouble(2, p.getPprice());
+            pstm.setInt(3, p.getPcode());
+            int result = pstm.executeUpdate();
+            if (result > 0) {
+                updated = true;
+            }
+        } catch (SQLException ex) {
+            //Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException:" + ex.getLocalizedMessage());
+        } finally {
+            closeConnections(pstm, null);
+        }
+        return updated;
+    }
+
 }
