@@ -35,6 +35,9 @@
                 </c:forEach>
             </table>
             <jsp:include page="../footer.jsp"/>
+            This is my Global Initial Parameter : ${Country}
+            <br/>
+            The images of each product will be uploaded to : ${location}
         </div>
 
     </body>
