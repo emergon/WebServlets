@@ -9,6 +9,7 @@
     <body>
         <div align="center">
             <%@include file="header.jsp" %>
+            ${message}
             <h2>Welcome. Please Login</h2>
             <form action="${pageContext.request.contextPath}/LoginServlet" method="POST">
                 <p>

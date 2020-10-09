@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -28,9 +29,12 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("kwdikos");
         String path;
         if (username.equals("admin") && password.equals("1234")) {
-            request.setAttribute("username", username);
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
             path = "/index.jsp";
         } else {
+            String message = "Credentials are wrong!!!";
+            request.setAttribute("message", message);
             path = "/login.jsp";
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(path);

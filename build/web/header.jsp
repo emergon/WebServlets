@@ -10,6 +10,9 @@
     <p>
         You are logged in as <b>${username}</b>
     </p>
+    <p>
+        <a href="${pageContext.request.contextPath}/LogoutServlet">Logout</a>
+    </p>
     <a href="${pageContext.request.contextPath}/ListProductServlet">
         Products
     </a>
