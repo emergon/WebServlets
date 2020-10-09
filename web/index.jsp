@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
         <div>Hello from my new Web application. This is my JSP page!</div>
 
         <p>
@@ -24,13 +25,14 @@
             </strong>
         </p>
 
-        <%--This is a scriptlet in my jsp page--%>
+        <%--This is a scriptlet in my jsp page
         <%
             printMessage(out);
             for (int i = 0; i < 10; i++) {
                 out.println("<br/>number:" + i);
             }
         %>
+        --%>
         <ul>
             <li>
                 <!--relative urls-->

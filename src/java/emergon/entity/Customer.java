@@ -38,6 +38,7 @@ public class Customer {
         hash = 43 * hash + Objects.hashCode(this.cname);
         return hash;
     }
+    
 
     @Override
     public boolean equals(Object obj) {

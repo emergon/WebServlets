@@ -7,6 +7,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div align="center" style="margin-bottom: 3em">
     <h3>Sales Company</h3>
+    <p>
+        You are logged in as <b>${username}</b>
+    </p>
     <a href="${pageContext.request.contextPath}/ListProductServlet">
         Products
     </a>
