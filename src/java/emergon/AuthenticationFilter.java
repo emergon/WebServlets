@@ -25,14 +25,24 @@ public class AuthenticationFilter implements Filter {
         //Check if session has Attribute username
         HttpSession session = httpRequest.getSession();
         String username = (String) session.getAttribute("username");
+        System.out.println("username:"+username);
+        
         String loginPage = "login.jsp";
-        String uri = httpRequest.getRequestURI();
-        if(username != null || (uri.contains(loginPage))){//username exists. User is logged in.
-            chain.doFilter(request, response);
-        } else{//username is null. User is not logged in.
+        String loginServlet = "LoginServlet";
+        String requestUri = httpRequest.getRequestURI();
+        System.out.println("requestUri:"+requestUri);
+        
+        boolean isUsernameNull = (username ==null);
+        System.out.println("isUsernameNull:"+isUsernameNull);
+        boolean isUserTryingToLogin = requestUri.contains(loginPage) || requestUri.contains(loginServlet);
+        System.out.println("isUserTryingToLogin:"+isUserTryingToLogin);
+        
+        if(isUsernameNull && !isUserTryingToLogin){//username=null && url=/products/list
             HttpServletResponse resp = (HttpServletResponse) response;
             String contextPath = httpRequest.getContextPath();
             resp.sendRedirect(contextPath+"/login.jsp");
+        }else{
+            chain.doFilter(request, response);
         }
         
     }

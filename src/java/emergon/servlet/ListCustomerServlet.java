@@ -59,4 +59,11 @@ public class ListCustomerServlet extends HttpServlet {
 
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        myResponse(resp);
+    }
+    
+    
+
 }

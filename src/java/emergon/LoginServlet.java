@@ -6,6 +6,7 @@
 package emergon;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,7 +39,11 @@ public class LoginServlet extends HttpServlet {
             path = "/login.jsp";
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+//        PrintWriter out =resp.getWriter();
+//        out.print("<h2>Success. Before footer</h2>");
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("/ListCustomerServlet");
         dispatcher.forward(request, resp);
+//        out.print("<h2>After Footer</h2>");
     }
 
 }
